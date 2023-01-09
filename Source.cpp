@@ -17,6 +17,7 @@ int main() {
      *
      * Cube.cpp
      * Map.cpp
+     * Minecraft.cpp
      *
      * TODO lesson 2: implement player control
      * For this lesson, you will need to work with the following files:
