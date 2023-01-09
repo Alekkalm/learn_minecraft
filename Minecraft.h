@@ -9,12 +9,15 @@
 #include "Player.h"
 #include "PlayerController.h"
 #include "Map.h"
+#include "engine/utils/ObjectController.h"
 
 class Minecraft : public Engine {
 private:
     std::shared_ptr<Player> player = std::make_shared<Player>();
     std::shared_ptr<PlayerController> playerController = std::make_shared<PlayerController>(player, keyboard, mouse);
     std::shared_ptr<Map> map = std::make_shared<Map>(world);
+
+    ObjectController cameraController;
 
     void start() override;
     void update() override;
@@ -26,7 +29,7 @@ private:
     void gui() override;
 
 public:
-    Minecraft() = default;
+    Minecraft() : cameraController(camera, keyboard, mouse){};
 };
 
 
