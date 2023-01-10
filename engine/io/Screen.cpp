@@ -107,9 +107,10 @@ void Screen::drawTriangle(const Triangle &triangle) {
     // Раскомментируйте эту строку для отображения границ треугольников
     //           |
     //          \/
-    _window->draw(lines, 4, sf::LineStrip); //АК комент: здесь отключать отображение линий
-
-    _window->draw(tris, 3, sf::Triangles);
+    //_window->draw(lines, 4, sf::LineStrip); //отображение линий треугольников (только для не OpenGL)
+    _window->draw(tris, 3, sf::Triangles); //отображение поверхностей треугольников (только для не OpenGL)
+    //клавиша "Tab" - отображение информации
+    //клавиша "O" - переключение "OpenGL" - "не OpenGL"
 }
 
 void Screen::setTitle(const std::string &title) {
