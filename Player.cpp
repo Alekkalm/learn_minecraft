@@ -11,7 +11,7 @@ RigidBody(Mesh::Cube(ObjectNameTag("Player"))) {
     setAcceleration(Vec3D(0, -MinecraftConsts::GRAVITY, 0));
     setCollision(true);
     setColor({240,168,168});
-
+    setVisible(false);//сделаем игрока невидимым
     scale(Vec3D(1.2, 1.9, 1.2));
     //recalculateHitBox();
 }
