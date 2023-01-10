@@ -26,7 +26,7 @@ void Minecraft::start() {
     // orientating and attaching camera
     // TODO: implemented (lesson 2)
     //камера на том же месте что и плеер, только выше
-    camera->translateToPoint(player->position() + Vec3D(0, 1.8, 0));
+    camera->translateToPoint(player->position() + Vec3D(0, 2, -2));
     player->attach(camera); //камера теперь компонент плеера, и при перемещении плеера, камера будет перемещаться такими же смещениями и поворотами
     player->translate(Vec3D(0, 6, 0));
 
