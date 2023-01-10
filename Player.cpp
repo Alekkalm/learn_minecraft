@@ -12,7 +12,7 @@ RigidBody(Mesh::Cube(ObjectNameTag("Player"))) {
     setCollision(true);
     setColor({240,168,168});
     setVisible(false);//сделаем игрока невидимым
-    scale(Vec3D(1.2, 1.9, 1.2));
+    scale(Vec3D(0.6, 1.0, 0.6));
     //recalculateHitBox();
 }
 
