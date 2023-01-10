@@ -16,23 +16,51 @@ void PlayerController::update() {
     auto camera = _player->attached(ObjectNameTag("Camera"));
 
     // Left and right movement
-    // TODO: implement (lesson 2)
+    // TODO: implemented (lesson 2)
+    if(Keyboard::isKeyPressed(sf::Keyboard::A)){
+        _player->translate(_player->left()*Time::deltaTime()*MinecraftConsts::WALK_SPEED);
+    }
+    if(Keyboard::isKeyPressed(sf::Keyboard::D)){
+        _player->translate(-_player->left()*Time::deltaTime()*MinecraftConsts::WALK_SPEED);
+    }
 
     // Forward and backward movement
-    // TODO: implement (lesson 2)
+    // TODO: implemented (lesson 2)
+    if(Keyboard::isKeyPressed(sf::Keyboard::W)){
+        _player->translate(_player->lookAt()*Time::deltaTime()*MinecraftConsts::WALK_SPEED);
+    }
+    if(Keyboard::isKeyPressed(sf::Keyboard::S)){
+        _player->translate(-_player->lookAt()*Time::deltaTime()*MinecraftConsts::WALK_SPEED);
+    }
 
     // Jump
-    // TODO: implement (lesson 2)
+    // TODO: implemented (lesson 2)
+    if(Keyboard::isKeyPressed(sf::Keyboard::Space) && _player->inCollision()){
+            _player->setVelocity(Vec3D(0, sqrt(2 * MinecraftConsts::GRAVITY * MinecraftConsts::JUMP_HEIGHT), 0));
+        }
 
     // Horizontal player rotation
-    // TODO: implement (lesson 2)
+    // TODO: implemented (lesson 2)
+    //влево-вправо поворачиваем человечка (камера поворачивается вместе с человечком, т.к. она прикреплена к нему)
+    Vec2D disp = _mouse->getMouseDisplacement();
+    _player->rotate(Vec3D(0, -disp.x() * MinecraftConsts::MOUSE_SENSITIVITY, 0));
 
     // Vertical player rotation
-    // TODO: implement (lesson 2)
+    // TODO: implemented (lesson 2)
+    //вверх-вниз - человечка не трогаем, поворачиваем только камеру.
+    double rotationLeft = disp.y() * MinecraftConsts::MOUSE_SENSITIVITY;
+    camera->rotateLeft(rotationLeft);
 
     // Change selected block
-    // TODO: implement (lesson 2)
-
+    // TODO: implemented (lesson 2)
+    if(Keyboard::isKeyPressed(sf::Keyboard::Right)){
+            _player->nextBlock();
+            _updateCubeInHandCallBack();
+        }
+    if(Keyboard::isKeyPressed(sf::Keyboard::Left)){
+            _player->previousBlock();
+            _updateCubeInHandCallBack();
+        }
     // Add or remove block
     // TODO: implement (lesson 3)
 

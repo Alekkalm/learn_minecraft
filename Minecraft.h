@@ -17,8 +17,7 @@ private:
     std::shared_ptr<PlayerController> playerController = std::make_shared<PlayerController>(player, keyboard, mouse);
     std::shared_ptr<Map> map = std::make_shared<Map>(world);
 
-    ObjectController cameraController;
-
+    
     void start() override;
     void update() override;
 
@@ -29,7 +28,7 @@ private:
     void gui() override;
 
 public:
-    Minecraft() : cameraController(camera, keyboard, mouse){};
+    Minecraft() = default;
 };
 
 

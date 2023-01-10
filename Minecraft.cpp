@@ -24,10 +24,23 @@ void Minecraft::start() {
     world->addBody(player);
 
     // orientating and attaching camera
-    // TODO: implement (lesson 2)
+    // TODO: implemented (lesson 2)
+    //камера на том же месте что и плеер, только выше
+    camera->translateToPoint(player->position() + Vec3D(0, 1.8, 0));
+    player->attach(camera); //камера теперь компонент плеера, и при перемещении плеера, камера будет перемещаться такими же смещениями и поворотами
+    player->translate(Vec3D(0, 6, 0));
 
     // adding cube in hand
-    // TODO: implement (lesson 2)
+    // TODO: implemented (lesson 2)
+    //куб который мы держим в руках
+    auto cube_in_hand = world->addBody(std::make_shared<RigidBody>(Mesh::Cube(ObjectNameTag("cube_in_hand"))));
+    cube_in_hand->setCollider(false);//уберем коллизии, чтобы у нас не выпрыгивал от нас
+    cube_in_hand->translateToPoint(player->position() + Vec3D{-3, -1, 1.4});//немного сместим
+    cube_in_hand->rotate(Vec3D(0, M_PI/10, 0));//немного повернем
+    camera->attach(cube_in_hand);//прикрепим к камере, чтобы он вращался вместе с камерой.
+    updateCubeInHandColor();
+
+    world->addBody(player);//в мир добавляем игрока
 }
 
 void Minecraft::update() {
@@ -54,11 +67,11 @@ void Minecraft::update() {
     }
 
     playerController->update();
-    cameraController.update();
 }
 
 void Minecraft::updateCubeInHandColor() {
-    // TODO: implement (lesson 2)
+    // TODO: implemented (lesson 2)
+    world->body(ObjectNameTag("cube_in_hand"))->setColor(Cube::cubeColor(player->selectedBlock()));
 }
 
 void Minecraft::gui() {
