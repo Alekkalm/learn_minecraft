@@ -15,7 +15,7 @@ void Minecraft::start() {
 
     // loading map
     // TODO: implemented (lesson 1)
-    map->loadMap(MinecraftConsts::MAP_NAME);
+    map->loadMap(MinecraftConsts::MAP_NAME);//загрузка карты
 
     // setting callbacks for playerController
     playerController->setAddCubeCallBack([this](){ addCube(); });
