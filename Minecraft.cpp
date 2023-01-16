@@ -74,8 +74,16 @@ void Minecraft::updateCubeInHandColor() {
     world->body(ObjectNameTag("cube_in_hand"))->setColor(Cube::cubeColor(player->selectedBlock()));
 }
 
-void Minecraft::gui() {
-    // TODO: implement (lesson 2)
+void Minecraft::gui() { //Gui - это часть интерфейса который отображается поверх графики. У нас это прицел.
+    // TODO: implemented (lesson 2)
+    auto t = ResourceManager::loadTexture(MinecraftConsts::AIM_TEXTURE); //загружаем текустуру прицела.
+    if(t != nullptr){
+        sf::Sprite sprite; //создаем спрайт
+        sprite.setTexture(*t);//задаем спрайту текстуру
+        sprite.setPosition(screen->width()/2 - 27, screen->height()/2 - 27); //спрайт распологаем в центре экрана: центр экрана минус половина размера спрайта.
+        sprite.setColor(sf::Color(0,0,0,150)); //зададим цвет - черный, и полупрозрачный.
+        screen->drawSprite(sprite);//выводим на экран
+    }
 }
 
 void Minecraft::addCube() {
