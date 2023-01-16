@@ -53,11 +53,11 @@ void PlayerController::update() {
 
     // Change selected block
     // TODO: implemented (lesson 2)
-    if(Keyboard::isKeyPressed(sf::Keyboard::Right)){
+    if(_keyboard->isKeyTapped(sf::Keyboard::Right)){
             _player->nextBlock();
             _updateCubeInHandCallBack();
         }
-    if(Keyboard::isKeyPressed(sf::Keyboard::Left)){
+    if(_keyboard->isKeyTapped(sf::Keyboard::Left)){
             _player->previousBlock();
             _updateCubeInHandCallBack();
         }
