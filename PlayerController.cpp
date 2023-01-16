@@ -49,6 +49,16 @@ void PlayerController::update() {
     // TODO: implemented (lesson 2)
     //вверх-вниз - человечка не трогаем, поворачиваем только камеру.
     double rotationLeft = disp.y() * MinecraftConsts::MOUSE_SENSITIVITY;
+
+    //ограничим возможность поворачивать голову вверх и вних на величину 90 градусов.
+    double headAngle = camera->angleLeftUpLookAt().x();
+    if(headAngle + rotationLeft > M_PI/2){ //если поворачиваем вниз, то не больше чем на 90 градусов.
+        rotationLeft = M_PI/2 - headAngle;
+    }
+    if(headAngle + rotationLeft < -M_PI/2){ //если поворачиваем вверх, то не больше чем на 90 градусов.
+        rotationLeft = -M_PI/2 - headAngle;
+    }
+
     camera->rotateLeft(rotationLeft);
 
     // Change selected block
