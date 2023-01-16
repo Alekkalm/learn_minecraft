@@ -12,7 +12,7 @@ RigidBody(Mesh::Cube(ObjectNameTag("Player"))) {
     setCollision(true);
     setColor({240,168,168});
     setVisible(false);//сделаем игрока невидимым
-    scale(Vec3D(1.5, 2.9, 1.5));
+    scale(Vec3D(1.5, 2.8, 1.5));
 }
 
 //меняем тип блока который выбран у игрока, который сейчас он может поставить
