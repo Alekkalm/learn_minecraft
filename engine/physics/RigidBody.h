@@ -84,7 +84,6 @@ public:
     void setTrigger(bool t) { _isTrigger = t; }
 
     void updatePhysicsState();
-    void recalculateHitBox();//АК добавил сам, почему то небыло в исходниках
 
     void setVelocity(const Vec3D &velocity);
     void addVelocity(const Vec3D &velocity);

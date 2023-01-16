@@ -22,10 +22,8 @@ bool HitBox::Vec3DLess::operator()(const Vec3D& lhs, const Vec3D& rhs) const noe
 
 HitBox::HitBox(const Mesh& mesh, bool useSimpleBox) {
     if (useSimpleBox) {
-        useSimpleBox = true;//АК - запоминаем на всякий случай
         generateSimple(mesh);
     } else {
-        useSimpleBox = false;//АК - запоминаем на всякий случай
         generateDetailed(mesh);
     }
 }
@@ -87,13 +85,4 @@ void HitBox::generateDetailed(const Mesh &mesh) {
     for (const auto& it : points)
         _hitBox.push_back(it);
     _hitBox.shrink_to_fit();
-}
-
-void HitBox::recalculate(const Mesh &mesh){   //АК: добавил для метода recalculateHitBox в RigidBody.
-    _hitBox.clear(); //удаляем все существующие точки (All elements are destroyed one by one), т.к. методы generate - будут только их добавлять.
-    if (useSimpleBox) {
-        generateSimple(mesh);
-    } else {
-        generateDetailed(mesh);
-    }
 }

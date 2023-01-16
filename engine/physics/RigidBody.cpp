@@ -19,10 +19,6 @@ RigidBody::RigidBody(ObjectNameTag nameTag, const std::string &filename, const V
 RigidBody::RigidBody(const Mesh &mesh, bool useSimpleBox) : Mesh(mesh), _hitBox(mesh, useSimpleBox) {
 }
 
-void RigidBody::recalculateHitBox(){
-    _hitBox.recalculate(*this);
-}
-
 void RigidBody::updatePhysicsState() {
     // TODO: implemented (lesson 5)
     _velocity = _velocity + _acceleration * Time::deltaTime();
