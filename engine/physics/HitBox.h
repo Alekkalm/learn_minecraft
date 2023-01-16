@@ -17,11 +17,14 @@ private:
 
     void generateSimple(const Mesh &mesh);
     void generateDetailed(const Mesh &mesh);
+
+    bool useSimpleBox = true;//АК: добавил для метода recalculateHitBox в RigidBody.
 public:
     HitBox() = default;
     HitBox(const HitBox &hitBox) = default;
 
     explicit HitBox(const Mesh &mesh, bool useSimpleBox = true);
+    void recalculate(const Mesh &mesh);//АК: добавил для метода recalculateHitBox в RigidBody.
 
     [[nodiscard]] std::vector<Vec3D>::iterator begin() { return _hitBox.begin(); }
 
