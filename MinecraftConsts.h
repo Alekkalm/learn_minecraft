@@ -6,7 +6,7 @@
 #define MINECRAFT_MINECRAFTCONSTS_H
 
 namespace MinecraftConsts {
-    const double WORLD_SCALE = 1; //масштабирование кубиков и скорости
+    const double WORLD_SCALE = 10; //масштабирование кубиков и скорости
     const double REACH_RANGE = 10; //максимальная длинна с которой мы можем ставить и ломать блоки
 
     const double GRAVITY = 20;
