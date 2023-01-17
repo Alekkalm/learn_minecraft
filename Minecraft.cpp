@@ -87,9 +87,21 @@ void Minecraft::gui() { //Gui - это часть интерфейса кото�
 }
 
 void Minecraft::addCube() {
-    // TODO: implement (lesson 3)
+    // TODO: implemented (lesson 3)
+    auto rayCast = world->rayCast(camera->position(), camera->position() + camera->lookAt()*10, "Player");
+    if((rayCast.pointOfIntersection - camera->position()).abs() <10){
+        Vec3D cubePoint = (rayCast.intersectedTriangle.position() + rayCast.intersectedTriangle.norm()*2);
+
+        map->addCube(Vec3D(round(cubePoint.x()/4), round(cubePoint.y()/4), round(cubePoint.z()/4)), player->selectedBlock());
+    }
 }
 
 void Minecraft::removeCube() {
-    // TODO: implement (lesson 3)
+    // TODO: implemented (lesson 3)
+        auto rayCast = world->rayCast(camera->position(), camera->position() + camera->lookAt()*10, "Player");
+    if((rayCast.pointOfIntersection - camera->position()).abs() <10){
+        Vec3D cubePoint = (rayCast.intersectedTriangle.position() - rayCast.intersectedTriangle.norm()*2);
+
+        map->removeCube(Vec3D(round(cubePoint.x()/4), round(cubePoint.y()/4), round(cubePoint.z()/4)));
+    }
 }

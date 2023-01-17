@@ -72,7 +72,13 @@ void PlayerController::update() {
             _updateCubeInHandCallBack();
         }
     // Add or remove block
-    // TODO: implement (lesson 3)
+    // TODO: implemented (lesson 3)
+    if(_mouse->isButtonTapped(sf::Mouse::Right)){
+        _addCubeCallBack();
+    }
+    if(_mouse->isButtonTapped(sf::Mouse::Left)){
+        _removeCubeCallBack();
+    }
 
     animateCameraMotion();
 }
