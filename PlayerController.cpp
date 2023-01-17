@@ -84,12 +84,24 @@ void PlayerController::update() {
 }
 
 void PlayerController::animateCameraMotion() {
-    bool inRunning_old = _inRunning;
+    bool inRunning_old = _inRunning;//было ли движение на предыдущем шаге
     _inRunning = Keyboard::isKeyPressed(sf::Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::W) || Keyboard::isKeyPressed(sf::Keyboard::S);
     auto camera = _player->attached(ObjectNameTag("Camera"));
 
     // Camera movement during run
-    // TODO: implement (lesson 3)
+    // TODO: implemented (lesson 3)
+    if(_inRunning){
+        //анимация влево на 0.3 сек, график скорости по косинусу
+        Timeline::addAnimation<ATranslate>(AnimationListTag("h"), camera, -camera->left()*MinecraftConsts::WORLD_SCALE/3, 0.3, Animation::LoopOut::None, Animation::InterpolationType::Cos);
+        Timeline::addAnimation<AWait>(AnimationListTag("h"), 0);
+        //анимация вправо на 0.3 сек, график скорости по косинусу (возвращаем в начальное положение)
+        Timeline::addAnimation<ATranslate>(AnimationListTag("h"), camera, camera->left()*MinecraftConsts::WORLD_SCALE/3, 0.3, Animation::LoopOut::None, Animation::InterpolationType::Cos);
+        Timeline::addAnimation<AWait>(AnimationListTag("h"), 0);
+    } else if(! _inRunning && inRunning_old){//если перестали двигаться то
+        Timeline::deleteAnimationList(AnimationListTag("h")); //удаляем анимацию кочания головой
+        //анимация на 0.15 сек возвращаем голову на место (туда куда была прикреплена камера когда мы её создавали)
+        Timeline::addAnimation<ATranslateToPoint>(camera, (_player->position() + Vec3D(0, 0.8, 0) * MinecraftConsts::WORLD_SCALE), 0.15);
+    }
 }
 
 // setting callbacks
