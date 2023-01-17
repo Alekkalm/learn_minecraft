@@ -18,25 +18,25 @@ void PlayerController::update() {
     // Left and right movement
     // TODO: implemented (lesson 2)
     if(Keyboard::isKeyPressed(sf::Keyboard::A)){
-        _player->translate(_player->left()*Time::deltaTime()*MinecraftConsts::WALK_SPEED);
+        _player->translate(_player->left()*Time::deltaTime()*MinecraftConsts::WALK_SPEED*MinecraftConsts::WORLD_SCALE);
     }
     if(Keyboard::isKeyPressed(sf::Keyboard::D)){
-        _player->translate(-_player->left()*Time::deltaTime()*MinecraftConsts::WALK_SPEED);
+        _player->translate(-_player->left()*Time::deltaTime()*MinecraftConsts::WALK_SPEED*MinecraftConsts::WORLD_SCALE);
     }
 
     // Forward and backward movement
     // TODO: implemented (lesson 2)
     if(Keyboard::isKeyPressed(sf::Keyboard::W)){
-        _player->translate(_player->lookAt()*Time::deltaTime()*MinecraftConsts::WALK_SPEED);
+        _player->translate(_player->lookAt()*Time::deltaTime()*MinecraftConsts::WALK_SPEED*MinecraftConsts::WORLD_SCALE);
     }
     if(Keyboard::isKeyPressed(sf::Keyboard::S)){
-        _player->translate(-_player->lookAt()*Time::deltaTime()*MinecraftConsts::WALK_SPEED);
+        _player->translate(-_player->lookAt()*Time::deltaTime()*MinecraftConsts::WALK_SPEED*MinecraftConsts::WORLD_SCALE);
     }
 
     // Jump
     // TODO: implemented (lesson 2)
     if(Keyboard::isKeyPressed(sf::Keyboard::Space) && _player->inCollision()){
-            _player->setVelocity(Vec3D(0, sqrt(2 * MinecraftConsts::GRAVITY * MinecraftConsts::JUMP_HEIGHT), 0));
+            _player->setVelocity(Vec3D(0, sqrt(2 * MinecraftConsts::GRAVITY * MinecraftConsts::JUMP_HEIGHT), 0)*MinecraftConsts::WORLD_SCALE);
         }
 
     // Horizontal player rotation

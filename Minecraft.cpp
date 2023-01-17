@@ -26,16 +26,16 @@ void Minecraft::start() {
     // orientating and attaching camera
     // TODO: implemented (lesson 2)
     //камера на том же месте что и плеер, только выше
-    camera->translateToPoint(player->position() + Vec3D(0, 2.8, 0));
+    camera->translateToPoint(player->position() + Vec3D(0, 0.8, 0) * MinecraftConsts::WORLD_SCALE);
     player->attach(camera); //камера теперь компонент плеера, и при перемещении плеера, камера будет перемещаться такими же смещениями и поворотами
-    player->translate(Vec3D(0, 6, 0));//сдвигаем плееера вверх, а то он при старте сразу куда-то проваливается.
+    player->translate(Vec3D(0, 1.5, 0)*MinecraftConsts::WORLD_SCALE);//сдвигаем плееера вверх, а то он при старте сразу куда-то проваливается.
 
     // adding cube in hand
     // TODO: implemented (lesson 2)
     //куб который мы держим в руках
-    auto cube_in_hand = world->addBody(std::make_shared<RigidBody>(Mesh::Cube(ObjectNameTag("cube_in_hand"), 3)));//3 - размер кубика в руках
+    auto cube_in_hand = world->addBody(std::make_shared<RigidBody>(Mesh::Cube(ObjectNameTag("cube_in_hand"), MinecraftConsts::WORLD_SCALE)));//последний аргумент - размер кубика в руках
     cube_in_hand->setCollider(false);//уберем коллизии, чтобы у нас не выпрыгивал от нас
-    cube_in_hand->translateToPoint(player->position() + Vec3D{-3, -1, 1.4});//немного сместим
+    cube_in_hand->translateToPoint(player->position() + Vec3D{-1.6, -0.5, 0.7}*MinecraftConsts::WORLD_SCALE);//немного сместим
     cube_in_hand->rotate(Vec3D(0, M_PI/10, 0));//немного повернем
     camera->attach(cube_in_hand);//прикрепим к камере, чтобы он вращался вместе с камерой.
     updateCubeInHandColor();
@@ -88,20 +88,20 @@ void Minecraft::gui() { //Gui - это часть интерфейса кото�
 
 void Minecraft::addCube() {
     // TODO: implemented (lesson 3)
-    auto rayCast = world->rayCast(camera->position(), camera->position() + camera->lookAt()*10, "Player");
-    if((rayCast.pointOfIntersection - camera->position()).abs() <10){
-        Vec3D cubePoint = (rayCast.intersectedTriangle.position() + rayCast.intersectedTriangle.norm()*2);
+    auto rayCast = world->rayCast(camera->position(), camera->position() + camera->lookAt(), "Player");
+    if((rayCast.pointOfIntersection - camera->position()).abs() < MinecraftConsts::REACH_RANGE * MinecraftConsts::WORLD_SCALE){
+        Vec3D cubePoint = (rayCast.intersectedTriangle.position() + rayCast.intersectedTriangle.norm() * MinecraftConsts::WORLD_SCALE / 2);
 
-        map->addCube(Vec3D(round(cubePoint.x()/4), round(cubePoint.y()/4), round(cubePoint.z()/4)), player->selectedBlock());
+        map->addCube(Vec3D(round(cubePoint.x()/MinecraftConsts::WORLD_SCALE), round(cubePoint.y()/MinecraftConsts::WORLD_SCALE), round(cubePoint.z()/MinecraftConsts::WORLD_SCALE)), player->selectedBlock());
     }
 }
 
 void Minecraft::removeCube() {
     // TODO: implemented (lesson 3)
-        auto rayCast = world->rayCast(camera->position(), camera->position() + camera->lookAt()*10, "Player");
-    if((rayCast.pointOfIntersection - camera->position()).abs() <10){
-        Vec3D cubePoint = (rayCast.intersectedTriangle.position() - rayCast.intersectedTriangle.norm()*2);
+        auto rayCast = world->rayCast(camera->position(), camera->position() + camera->lookAt(), "Player");
+    if((rayCast.pointOfIntersection - camera->position()).abs() < MinecraftConsts::REACH_RANGE * MinecraftConsts::WORLD_SCALE){
+        Vec3D cubePoint = (rayCast.intersectedTriangle.position() - rayCast.intersectedTriangle.norm() * MinecraftConsts::WORLD_SCALE / 2);
 
-        map->removeCube(Vec3D(round(cubePoint.x()/4), round(cubePoint.y()/4), round(cubePoint.z()/4)));
+        map->removeCube(Vec3D(round(cubePoint.x()/MinecraftConsts::WORLD_SCALE), round(cubePoint.y()/MinecraftConsts::WORLD_SCALE), round(cubePoint.z()/MinecraftConsts::WORLD_SCALE)));
     }
 }

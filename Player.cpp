@@ -11,8 +11,8 @@ RigidBody(Mesh::Cube(ObjectNameTag("Player"))) {
     setAcceleration(Vec3D(0, -MinecraftConsts::GRAVITY, 0));
     setCollision(true);
     setColor({240,168,168});
-    setVisible(false);//сделаем игрока невидимым
-    scale(Vec3D(1.5, 2.8, 1.5));
+    setVisible(true);//сделаем игрока невидимым
+    scale(Vec3D(0.5, 0.8, 0.5)*MinecraftConsts::WORLD_SCALE);
 }
 
 //меняем тип блока который выбран у игрока, который сейчас он может поставить

@@ -5,10 +5,10 @@
 #include "Cube.h"
 
 Cube::Cube(const ObjectNameTag& name, const Vec3D &pos, Cube::Type t) : 
-RigidBody(Mesh::Cube(name, 4)), type(t){ //Увеличим все в 3 раза (чтобы зона отсечения ближняя не срабатывала.)
+RigidBody(Mesh::Cube(name, MinecraftConsts::WORLD_SCALE)), type(t){ //Увеличим все в 3 раза (чтобы зона отсечения ближняя не срабатывала.)
     // TODO: implemented (lesson 1)
     setColor(Cube::cubeColor(t));
-    translate(pos*4);//Увеличим все в 3 раза (чтобы зона отсечения ближняя не срабатывала.)
+    translate(pos*MinecraftConsts::WORLD_SCALE);//Увеличим все в 3 раза (чтобы зона отсечения ближняя не срабатывала.)
     setCollider(true);
 }
 
