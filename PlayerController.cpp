@@ -97,10 +97,27 @@ void PlayerController::animateCameraMotion() {
         //анимация вправо на 0.3 сек, график скорости по косинусу (возвращаем в начальное положение)
         Timeline::addAnimation<ATranslate>(AnimationListTag("h"), camera, camera->left()*MinecraftConsts::WORLD_SCALE/3, 0.3, Animation::LoopOut::None, Animation::InterpolationType::Cos);
         Timeline::addAnimation<AWait>(AnimationListTag("h"), 0);
+
+        //вертикальные колебания чаще в два раза (по 0.15 сек)
+        //и с меньшей амплитудой (делим на 6)
+        //анимация вниз на 0.15 сек, график скорости по косинусу
+        Timeline::addAnimation<ATranslate>(AnimationListTag("v"), camera, -_player->up()*MinecraftConsts::WORLD_SCALE/6, 0.15, Animation::LoopOut::None, Animation::InterpolationType::Cos);
+        Timeline::addAnimation<AWait>(AnimationListTag("v"), 0);
+        //анимация вверх на 0.15 сек, график скорости по косинусу (возвращаем в начальное положение)
+        Timeline::addAnimation<ATranslate>(AnimationListTag("v"), camera, _player->up()*MinecraftConsts::WORLD_SCALE/6, 0.15, Animation::LoopOut::None, Animation::InterpolationType::Cos);
+        Timeline::addAnimation<AWait>(AnimationListTag("v"), 0);
+        //анимация вниз на 0.15 сек, график скорости по косинусу
+        Timeline::addAnimation<ATranslate>(AnimationListTag("v"), camera, -_player->up()*MinecraftConsts::WORLD_SCALE/6, 0.15, Animation::LoopOut::None, Animation::InterpolationType::Cos);
+        Timeline::addAnimation<AWait>(AnimationListTag("v"), 0);
+        //анимация вверх на 0.15 сек, график скорости по косинусу (возвращаем в начальное положение)
+        Timeline::addAnimation<ATranslate>(AnimationListTag("v"), camera, _player->up()*MinecraftConsts::WORLD_SCALE/6, 0.15, Animation::LoopOut::None, Animation::InterpolationType::Cos);
+        Timeline::addAnimation<AWait>(AnimationListTag("v"), 0);
+
     } else if(! _inRunning && inRunning_old){//если перестали двигаться то
         Timeline::deleteAnimationList(AnimationListTag("h")); //удаляем анимацию кочания головой
-        //анимация на 0.15 сек возвращаем голову на место (туда куда была прикреплена камера когда мы её создавали)
-        Timeline::addAnimation<ATranslateToPoint>(camera, (_player->position() + Vec3D(0, 0.8, 0) * MinecraftConsts::WORLD_SCALE), 0.15);
+        Timeline::deleteAnimationList(AnimationListTag("v")); //удаляем анимацию кочания головой
+        //анимация на 0.3 сек возвращаем голову на место (туда куда была прикреплена камера когда мы её создавали)
+        Timeline::addAnimation<ATranslateToPoint>(camera, (_player->position() + Vec3D(0, 0.8, 0) * MinecraftConsts::WORLD_SCALE), 0.3);
     }
 }
 
