@@ -8,7 +8,7 @@
 Player::Player() : 
 RigidBody(Mesh::Cube(ObjectNameTag("Player"))) {
     // TODO: implemented (lesson 2)
-    setAcceleration(Vec3D(0, -MinecraftConsts::GRAVITY, 0));
+    setAcceleration(Vec3D(0, -MinecraftConsts::GRAVITY*MinecraftConsts::WORLD_SCALE, 0));
     setCollision(true);
     setColor({240,168,168});
     setVisible(true);//сделаем игрока невидимым
