@@ -28,7 +28,7 @@ void Minecraft::start() {
     //камера на том же месте что и плеер, только выше
     camera->translateToPoint(player->position() + Vec3D(0, 0.8, 0) * MinecraftConsts::WORLD_SCALE);
     player->attach(camera); //камера теперь компонент плеера, и при перемещении плеера, камера будет перемещаться такими же смещениями и поворотами
-    player->translate(Vec3D(0, 1.5, 0)*MinecraftConsts::WORLD_SCALE);//сдвигаем плееера вверх, а то он при старте сразу куда-то проваливается.
+    player->translate(Vec3D(0, 2, 0)*MinecraftConsts::WORLD_SCALE);//сдвигаем плееера вверх, а то он при старте сразу куда-то проваливается.
 
     // adding cube in hand
     // TODO: implemented (lesson 2)
